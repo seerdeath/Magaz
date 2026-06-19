@@ -65,7 +65,7 @@
                 <h3>Данные профиля</h3>
                 <p>Email: <span id="userEmailText">-</span></p>
                 <p>Роль: <span id="userRoleText">-</span></p>
-                <button class="btn-hero btn-hero-secondary" id="btnLogout" style="margin-top:20px; padding:8px;">Выйти из аккаунта</button>
+                <button class="btn-hero-secondary" id="btnLogout" style="margin-top:20px; padding:8px 16px;">Выйти из аккаунта</button>
             </div>
             <div class="profile-orders-block">
                 <h3>История заказов</h3>
@@ -74,7 +74,7 @@
         </div>
     </section>
 
-    <section id="adminSection" class="catalog-section hidden">
+<section id="adminSection" class="catalog-section hidden">
         <h2 class="catalog-title" style="color:var(--danger)">Панель администратора</h2>
         <div class="admin-tabs">
             <button class="catalog-chip active" id="tabAdminProducts">Товары</button>
@@ -91,13 +91,12 @@
                 <div class="form-group"><label>Цена (₸)</label><input type="number" id="prodPrice" required></div>
                 <div class="form-group"><label>Категория</label><input type="text" id="prodCategory" placeholder="clothing, accessories..." required></div>
                 <div class="form-group"><label>Количество на складе</label><input type="number" id="prodStock" value="10"></div>
-                <div class="form-group"><label>Изображение товара</label><input type="file" id="prodImage" accept="image/*"></div>
+                <div class="form-group"><label>Изображение (ссылка)</label><input type="text" id="prodImage" placeholder="https://..." required></div>
                 <div style="display:flex; gap:20px; margin-bottom:15px;">
-                    <label><input type="checkbox" id="prodIsNew"> Новинка (NEW)</label>
-                    <label><input type="checkbox" id="prodIsSale"> Скидка (SALE)</label>
+                    <label><input type="checkbox" id="prodIsNew"> Новинка</label>
+                    <label><input type="checkbox" id="prodIsSale"> Скидка</label>
                 </div>
                 <button type="submit" class="btn-primary" id="btnSaveProduct">Сохранить товар</button>
-                <button type="button" class="btn-hero btn-hero-secondary hidden" id="btnCancelEdit" style="margin-top:10px;">Отмена редактирования</button>
             </form>
             <h3 style="margin-top:30px;">Список товаров</h3>
             <div id="adminProductsList"></div>
