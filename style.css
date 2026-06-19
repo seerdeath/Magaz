@@ -1,0 +1,19 @@
+.hidden { display: none !important; }
+.search-sort-bar { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.store-input, .store-select { background: #111; border: 1px solid var(--border); padding: 12px; border-radius: var(--radius-sm); color: var(--text); font-family: inherit; }
+.store-input { flex: 1; min-width: 200px; }
+.store-select { min-width: 180px; cursor: pointer; }
+.profile-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; margin-top: 24px; }
+@media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+.profile-info-block, .profile-orders-block, .admin-form, .admin-item-row { background: var(--surface); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 16px; }
+.admin-tabs { display: flex; gap: 10px; margin-bottom: 24px; }
+.admin-view { margin-top: 20px; }
+.admin-item-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.admin-item-actions { display: flex; gap: 8px; }
+.order-history-card { border-bottom: 1px solid var(--border); padding: 12px 0; }
+.order-history-card:last-child { border-bottom: none; }
+.status-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+.status-Новый { background: #e67e22; color: #fff; }
+.status-Оплачен { background: #2f9e44; color: #fff; }
+.status-Доставлен { background: #3498db; color: #fff; }
+.status-Отменен { background: #e03131; color: #fff; }
