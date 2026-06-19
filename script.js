@@ -1,6 +1,6 @@
 // Переключаем скрипт на использование данных из Supabase
-const SUPABASE_URL = "ВАШ_SUPABASE_URL"; 
-const SUPABASE_ANON_KEY = "ВАШ_SUPABASE_ANON_KEY";
+const SUPABASE_URL = "https://neexdqhivtlilsgnfriy.supabase.co"; 
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5lZXhkcWhpdnRsaWxzZ25mcml5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NzQ5MDQsImV4cCI6MjA5NzQ1MDkwNH0.DkEprA84Ls65wbIQforcWH2nHmCURj4sQn47wQvfXHs";
 
 const supabase = ::supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
