@@ -3,349 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seer — digital merch</title>
-    
+    <title>Seer — e-commerce platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg: #050505;
-            --surface: #0f0f0f;
-            --surface-hover: #1a1a1a;
-            --text: #ffffff;
-            --text-secondary: #666666;
-            --border: #1f1f1f;
-            --border-dark: #333333;
-            --danger: #e03131;
-            --success: #2f9e44;
-            --radius: 12px;
-            --radius-sm: 8px;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            letter-spacing: -0.2px;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 80px 80px;
-            background-attachment: fixed;
-        }
-
-        /* Announcement bar */
-        .announcement {
-            background: var(--surface);
-            color: var(--text-secondary);
-            text-align: center;
-            padding: 8px;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border);
-        }
-
-        /* Header */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(5, 5, 5, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 24px;
-        }
-
-        .header-inner {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            text-decoration: none;
-            color: var(--text);
-            text-transform: uppercase;
-        }
-
-        .header-actions { display: flex; align-items: center; gap: 12px; }
-
-        .icon-btn {
-            width: 36px; height: 36px;
-            border-radius: 50%;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text);
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            transition: background 0.2s;
-            position: relative;
-        }
-
-        .icon-btn:hover { background: var(--surface-hover); }
-
-        .profile-btn {
-            display: flex; align-items: center; gap: 8px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 4px 4px 4px 12px;
-            border-radius: 20px;
-            color: var(--text);
-            font-size: 0.85rem; font-weight: 600;
-            cursor: pointer;
-        }
-
-        .profile-avatar {
-            width: 24px; height: 24px;
-            background: #333; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 10px;
-        }
-
-        .cart-count {
-            position: absolute; top: -4px; right: -4px;
-            background: var(--text); color: var(--bg);
-            font-size: 0.65rem; min-width: 16px; height: 16px;
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 800; padding: 0 4px;
-        }
-        .cart-count:empty { display: none; }
-
-        /* Hero Section */
-        .hero { max-width: 800px; margin: 60px auto 40px; text-align: center; padding: 0 20px; }
-        .hero h1 { font-size: 4.5rem; line-height: 0.9; font-weight: 800; letter-spacing: -2px; text-transform: uppercase; margin-bottom: 40px; }
-        .hero h1 span.outline { color: transparent; -webkit-text-stroke: 1px var(--text); }
-
-        .hero-actions { display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto; }
-        .btn-hero { padding: 16px; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s; border: none; }
-        .btn-hero-primary { background: var(--text); color: var(--bg); }
-        .btn-hero-primary:hover { background: #e0e0e0; }
-        .btn-hero-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-dark); }
-        .btn-hero-secondary:hover { background: var(--surface); }
-
-        .hero-stats {
-            display: inline-flex; justify-content: center; align-items: center; gap: 32px;
-            margin-top: 40px; padding: 20px 40px;
-            background: var(--surface); border-radius: 40px; border: 1px solid var(--border);
-        }
-        .stat-item { text-align: center; display: flex; flex-direction: column; }
-        .stat-value { font-size: 1.5rem; font-weight: 800; line-height: 1; }
-        .stat-label { font-size: 0.65rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-        .stat-divider { width: 1px; height: 30px; background: var(--border-dark); }
-
-        /* Catalog section */
-        .catalog-section { max-width: 1300px; margin: 60px auto 20px; padding: 0 24px; }
-        .section-title { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 700; }
-        .catalog-title { font-size: 2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; }
-        .catalog-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-        .catalog-chip {
-            padding: 8px 16px; border: 1px solid var(--border); background: var(--surface); border-radius: 20px;
-            cursor: pointer; font-family: inherit; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); transition: all 0.2s;
-        }
-        .catalog-chip:hover { background: var(--surface-hover); color: var(--text); }
-        .catalog-chip.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-
-        /* Products */
-        .products-section { max-width: 1300px; margin: 0 auto 80px; padding: 0 24px; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-        .product-card {
-            background: var(--surface); border-radius: var(--radius); padding: 12px;
-            display: flex; flex-direction: column; transition: transform 0.2s, background 0.2s, border-color 0.2s;
-            border: 1px solid var(--border);
-        }
-        .product-card:hover { background: var(--surface-hover); border-color: var(--border-dark); }
-        .product-image-wrap {
-            position: relative; width: 100%; aspect-ratio: 4/5; background: #151515;
-            border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;
-            margin-bottom: 16px; font-size: 5rem; user-select: none;
-        }
-        .badge {
-            position: absolute; top: 12px; left: 12px; background: var(--text); color: var(--bg);
-            padding: 4px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;
-        }
-        .badge.sale { background: transparent; color: var(--text); border: 1px solid var(--text); }
-        .btn-heart {
-            position: absolute; top: 12px; right: 12px; width: 32px; height: 32px;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); border-radius: var(--radius-sm);
-            border: none; color: var(--text-secondary); cursor: pointer; transition: color 0.2s;
-        }
-        .btn-heart:hover { color: var(--danger); }
-        .product-category { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-secondary); margin-bottom: 4px; font-weight: 700; }
-        .product-name { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 16px; line-height: 1.3; }
-        .product-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-        .product-price { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.5px; }
-        .btn-add {
-            background: var(--border-dark); color: var(--text); border: none; width: 36px; height: 36px;
-            border-radius: var(--radius-sm); cursor: pointer; font-family: inherit; font-size: 1.2rem; font-weight: 600;
-            display: flex; align-items: center; justify-content: center; transition: all 0.2s;
-        }
-        .btn-add:hover:not(.in-cart) { background: var(--text); color: var(--bg); }
-        .btn-add.in-cart { background: var(--success); color: white; cursor: default; font-size: 1rem; }
-
-        /* Cart & Modals Shared */
-        .overlay {
-            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px);
-            z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.25s;
-        }
-        .overlay.open { opacity: 1; pointer-events: all; }
-        .btn-close {
-            background: var(--border); border: none; width: 32px; height: 32px; border-radius: 50%;
-            cursor: pointer; color: var(--text); display: flex; align-items: center; justify-content: center; transition: background 0.2s;
-        }
-        .btn-close:hover { background: var(--border-dark); }
-
-        /* Cart panel */
-        .cart-panel {
-            position: fixed; top: 0; right: 0; width: 400px; max-width: 100vw; height: 100vh;
-            background: var(--surface); border-left: 1px solid var(--border); z-index: 201;
-            transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column;
-        }
-        .cart-panel.open { transform: translateX(0); }
-        .cart-header, .cart-footer, .modal-header { padding: 20px 24px; }
-        .cart-header { border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-        .cart-header h3, .modal-header h3 { font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; }
-        .cart-items { flex: 1; overflow-y: auto; padding: 16px 24px; }
-        .cart-empty-state { text-align: center; padding: 60px 20px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
-        .cart-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); align-items: center; }
-        .cart-item-img { width: 70px; height: 70px; background: #151515; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; }
-        .cart-item-info { flex: 1; min-width: 0; }
-        .cart-item-cat { font-size: 0.65rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
-        .cart-item-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
-        .cart-item-price { font-size: 0.9rem; font-weight: 800; }
-        .cart-item-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-        .cart-item-qty { display: flex; align-items: center; gap: 8px; background: var(--border); border-radius: 20px; padding: 2px; }
-        .qty-btn { width: 24px; height: 24px; border-radius: 50%; border: none; background: transparent; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; color: var(--text); transition: background 0.2s; }
-        .qty-btn:hover { background: var(--border-dark); }
-        .qty-val { font-size: 0.85rem; min-width: 16px; text-align: center; font-weight: 700; }
-        .btn-remove { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; transition: color 0.2s; }
-        .btn-remove:hover { color: var(--danger); }
-        .cart-footer { border-top: 1px solid var(--border); background: var(--surface); }
-        .cart-total-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.2rem; margin-bottom: 20px; }
-        .btn-primary {
-            width: 100%; padding: 16px; background: var(--text); color: var(--bg); border: none;
-            border-radius: var(--radius-sm); cursor: pointer; font-family: inherit; font-size: 0.95rem;
-            font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; transition: opacity 0.2s;
-}
-        .btn-primary:hover { opacity: 0.85; }
-        .btn-primary:disabled { opacity: 0.3; cursor: not-allowed; }
-
-        /* Checkout modal */
-        .modal-overlay { z-index: 300; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .modal {
-            background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-            width: 500px; max-width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow);
-        }
-        .modal-header { border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .modal-body { padding: 24px; }
-        .modal-body h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-secondary); margin-bottom: 16px; }
-        .order-summary { background: #151515; border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px; }
-        .order-summary-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 6px 0; font-weight: 500; }
-        .order-summary-divider { border-top: 1px dashed var(--border-dark); margin: 12px 0; }
-        .order-summary-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem; }
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px; }
-        .form-group input { width: 100%; padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); font-family: inherit; font-size: 0.95rem; color: var(--text); background: #111; transition: border-color 0.2s; }
-        .form-group input:focus { outline: none; border-color: var(--text-secondary); background: var(--surface); }
-        .success-screen { text-align: center; padding: 20px 0; }
-        .success-icon { font-size: 4rem; margin-bottom: 16px; }
-        .success-screen h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
-        .success-screen p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px; }
-        .order-number { background: #151515; padding: 12px 20px; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; display: inline-block; margin-bottom: 24px; }
-
-        /* Toast */
-        .toast {
-            position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(120px);
-            background: var(--text); color: var(--bg); padding: 12px 24px; border-radius: 30px;
-            font-size: 0.85rem; font-weight: 700; z-index: 400; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none; box-shadow: var(--shadow);
-        }
-        .toast.show { transform: translateX(-50%) translateY(0); }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 3.2rem; }
-            .hero-stats { flex-direction: row; gap: 20px; padding: 16px 24px; }
-            .stat-value { font-size: 1.2rem; }
-            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .product-card { padding: 8px; }
-            .product-image-wrap { font-size: 3rem; margin-bottom: 12px; }
-            .product-name { font-size: 0.8rem; }
-            .product-price { font-size: 0.95rem; }
-            .btn-add { width: 32px; height: 32px; font-size: 1rem; }
-            .cart-panel { width: 100vw; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
     <div class="announcement">бесплатная доставка при заказе от 5 000 ₸</div>
 
     <header class="header">
         <div class="header-inner">
-            <a href="#" class="logo">Seer</a>
+            <a href="#" class="logo" id="logoLink">Seer</a>
             <div class="header-actions">
-                <button class="icon-btn" aria-label="Сменить язык">🇷🇺</button>
-                <button class="icon-btn" aria-label="Избранное">❤️</button>
-                <button class="icon-btn" aria-label="Корзина" onclick="toggleCart()">
-                    🛒
-                    <span class="cart-count" id="cartCount"></span>
+                <button class="icon-btn" id="btnFavorites" aria-label="Избранное">❤️</button>
+                <button class="icon-btn" id="btnToggleCart" aria-label="Корзина">
+                    🛒<span class="cart-count" id="cartCount"></span>
                 </button>
-                <button class="profile-btn">
-                    @seerdeath
-                    <div class="profile-avatar">👤</div>
+                <button class="profile-btn" id="btnAuthToggle">
+                    <span id="profileName">Войти</span>
+                    <div class="profile-avatar" id="profileAvatar">👤</div>
                 </button>
+                <button class="catalog-chip active hidden" id="btnAdminPanel" style="background:#e03131;color:#fff;">Админка</button>
             </div>
         </div>
     </header>
 
-    <section class="hero">
-        <h1>PLAY<br><span class="outline">HARD</span><br>DRESS<br>HARDER</h1>
-        <div class="hero-actions">
-            <button class="btn-hero btn-hero-primary">Перейти в магазин</button>
-            <button class="btn-hero btn-hero-secondary">О бренде</button>
+    <main id="mainContent">
+        <section class="hero">
+            <h1>PLAY<br><span class="outline">HARD</span><br>DRESS<br>HARDER</h1>
+            <div class="hero-stats">
+                <div class="stat-item"><span class="stat-value" id="statsCount">0</span><span class="stat-label">Артикулов</span></div>
+            </div>
+        </section>
+
+        <section class="catalog-section">
+            <div class="search-sort-bar">
+                <input type="text" id="searchBar" placeholder="Поиск товаров..." class="store-input">
+                <select id="sortBy" class="store-select">
+                    <option value="novelty">Новинки</option>
+                    <option value="price_asc">Цена: по возрастанию</option>
+                    <option value="price_desc">Цена: по убыванию</option>
+                    <option value="popularity">Популярность</option>
+                </select>
+            </div>
+            <div class="section-title">Shop by</div>
+            <h2 class="catalog-title">Категории</h2>
+            <div class="catalog-bar" id="catalogBar"></div>
+        </section>
+
+        <section class="products-section">
+            <div class="products-grid" id="productsGrid"></div>
+        </section>
+    </main>
+
+    <section id="profileSection" class="catalog-section hidden">
+        <h2 class="catalog-title">Личный кабинет</h2>
+        <div class="profile-grid">
+            <div class="profile-info-block">
+                <h3>Данные профиля</h3>
+                <p>Email: <span id="userEmailText">-</span></p>
+                <p>Роль: <span id="userRoleText">-</span></p>
+                <button class="btn-hero btn-hero-secondary" id="btnLogout" style="margin-top:20px; padding:8px;">Выйти из аккаунта</button>
+            </div>
+            <div class="profile-orders-block">
+                <h3>История заказов</h3>
+                <div id="orderHistoryList">Загрузка заказов...</div>
+            </div>
         </div>
-        <div class="hero-stats">
-            <div class="stat-item"><span class="stat-value">50</span><span class="stat-label">Артикулов</span></div>
-            <div class="stat-divider"></div>
-            <div class="stat-item"><span class="stat-value">14</span><span class="stat-label">Коллекции</span></div>
+    </section>
+
+    <section id="adminSection" class="catalog-section hidden">
+        <h2 class="catalog-title" style="color:var(--danger)">Панель администратора</h2>
+        <div class="admin-tabs">
+            <button class="catalog-chip active" id="tabAdminProducts">Товары</button>
+            <button class="catalog-chip" id="tabAdminOrders">Заказы</button>
+            <button class="catalog-chip" id="tabAdminUsers">Пользователи</button>
+        </div>
+
+        <div id="adminProductsView" class="admin-view">
+            <h3>Добавить / Редактировать товар</h3>
+            <form id="productForm" class="admin-form">
+                <input type="hidden" id="editProductId">
+                <div class="form-group"><label>Название</label><input type="text" id="prodName" required></div>
+                <div class="form-group"><label>Описание</label><input type="text" id="prodDesc"></div>
+                <div class="form-group"><label>Цена (₸)</label><input type="number" id="prodPrice" required></div>
+                <div class="form-group"><label>Категория</label><input type="text" id="prodCategory" placeholder="clothing, accessories..." required></div>
+                <div class="form-group"><label>Количество на складе</label><input type="number" id="prodStock" value="10"></div>
+                <div class="form-group"><label>Изображение товара</label><input type="file" id="prodImage" accept="image/*"></div>
+                <div style="display:flex; gap:20px; margin-bottom:15px;">
+                    <label><input type="checkbox" id="prodIsNew"> Новинка (NEW)</label>
+                    <label><input type="checkbox" id="prodIsSale"> Скидка (SALE)</label>
+                </div>
+                <button type="submit" class="btn-primary" id="btnSaveProduct">Сохранить товар</button>
+                <button type="button" class="btn-hero btn-hero-secondary hidden" id="btnCancelEdit" style="margin-top:10px;">Отмена редактирования</button>
+            </form>
+            <h3 style="margin-top:30px;">Список товаров</h3>
+            <div id="adminProductsList"></div>
+        </div>
+
+        <div id="adminOrdersView" class="admin-view hidden">
+            <h3>Все заказы системы</h3>
+            <div id="adminOrdersList"></div>
+        </div>
+
+        <div id="adminUsersView" class="admin-view hidden">
+            <h3>Зарегистрированные пользователи</h3>
+            <div id="adminUsersList"></div>
         </div>
     </section>
 
-    <section class="catalog-section">
-        <div class="section-title">Shop by</div>
-        <h2 class="catalog-title">Категории</h2>
-        <div class="catalog-bar" id="catalogBar"></div>
-    </section>
+    <div class="overlay modal-overlay" id="authModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="authModalTitle">Вход в аккаунт</h3>
+                <button class="btn-close" id="btnCloseAuth">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="authForm">
+                    <div class="form-group"><label>Email</label><input type="email" id="authEmail" required></div>
+                    <div class="form-group"><label>Пароль</label><input type="password" id="authPassword" required></div>
+                    <button type="submit" class="btn-primary" id="btnAuthSubmit">Войти</button>
+                </form>
+                <p style="margin-top:15px; text-align:center; font-size:0.85rem; color:var(--text-secondary)">
+                    <span id="authSwitchText">Нет аккаунта?</span> 
+                    <a href="#" id="linkSwitchAuth" style="color:var(--text); font-weight:600;">Зарегистрироваться</a>
+                </p>
+            </div>
+        </div>
+    </div>
 
-    <section class="products-section">
-        <div class="products-grid" id="productsGrid"></div>
-    </section>
-
-    <div class="overlay cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-
+    <div class="overlay cart-overlay" id="cartOverlay"></div>
     <div class="cart-panel" id="cartPanel">
         <div class="cart-header">
             <h3>Корзина</h3>
-            <button class="btn-close" aria-label="Закрыть корзину" onclick="toggleCart()">✕</button>
+            <button class="btn-close" id="btnCloseCart">✕</button>
         </div>
         <div class="cart-items" id="cartItems"></div>
         <div class="cart-footer">
             <div class="cart-total-row"><span>Итого</span><span id="cartTotal">0 ₸</span></div>
-            <button class="btn-primary" id="btnCheckout" disabled onclick="openCheckout()">Оформить заказ</button>
+            <button class="btn-primary" id="btnCheckout" disabled>Оформить заказ</button>
         </div>
     </div>
 
@@ -355,260 +153,6 @@
 
     <div class="toast" id="toast"></div>
 
-    <script>
-        // ==================== ОПТИМИЗАЦИЯ DOM ====================
-        const DOM = {
-            catalogBar: document.getElementById('catalogBar'),
-            productsGrid: document.getElementById('productsGrid'),
-            cartCount: document.getElementById('cartCount'),
-            cartTotal: document.getElementById('cartTotal'),
-            cartItems: document.getElementById('cartItems'),
-            btnCheckout: document.getElementById('btnCheckout'),
-            cartPanel: document.getElementById('cartPanel'),
-            cartOverlay: document.getElementById('cartOverlay'),
-            checkoutModal: document.getElementById('checkoutModal'),
-            checkoutInner: document.getElementById('checkoutModalInner'),
-            toast: document.getElementById('toast')
-        };
-
-        // ==================== ДАННЫЕ ====================
-        const catalogs = [
-            { id: 'all', name: 'Все' },
-            { id: 'clothing', name: 'Одежда' },
-            { id: 'accessories', name: 'Аксессуары' },
-            { id: 'digital', name: 'Digital' },
-            { id: 'home', name: 'Для дома' }
-        ];
-
-        const products = [
-            { id: 1, catalog: 'clothing', badge: 'NEW', name: 'Зип-худи Team Spirit 2026', price: 12990, image: '👕' },
-            { id: 2, catalog: 'clothing', badge: 'HIT', name: 'Team Spirit PRO KIT JERSEY 25-26', price: 5990, image: '👚' },
-            { id: 3, catalog: 'clothing', badge: 'SALE', name: 'Футболка BetBoom T-shirt', price: 7490, image: '🩳' },
-            { id: 4, catalog: 'clothing', badge: 'NEW', name: 'Кепка Crimson', price: 4490, image: '🧢' },
-            { id: 5, catalog: 'accessories', badge: '', name: 'Стикерпак «Dev»', price: 2490, image: '🎯' },
-            { id: 6, catalog: 'accessories', badge: 'HIT', name: 'Патч «console.log»', price: 1490, image: '🏷️' },
-            { id: 7, catalog: 'accessories', badge: '', name: 'Коврик для мыши PRO', price: 5990, image: '🖱️' },
-            { id: 8, catalog: 'accessories', badge: 'SALE', name: 'Брелок «SQL»', price: 1990, image: '🔑' },
-            { id: 9, catalog: 'digital', badge: 'NEW', name: 'Гайд по Vim', price: 2990, image: '📘' },
-            { id: 10, catalog: 'digital', badge: '', name: 'Пресеты Lightroom', price: 1990, image: '🎨' },
-            { id: 11, catalog: 'digital', badge: 'HIT', name: 'Шрифт Mono', price: 990, image: '🔤' },
-            { id: 12, catalog: 'digital', badge: 'SALE', name: 'Обои 4K Black', price: 590, image: '🖥️' },
-            { id: 13, catalog: 'home', badge: '', name: 'Постер «terminal»', price: 3990, image: '🖼️' },
-            { id: 14, catalog: 'home', badge: 'HIT', name: 'Кружка «sudo»', price: 3490, image: '☕' },
-            { id: 15, catalog: 'home', badge: 'NEW', name: 'Свеча «sanitize»', price: 2990, image: '🕯️' },
-            { id: 16, catalog: 'home', badge: '', name: 'Блокнот «debug»', price: 2490, image: '📓' }
-        ];
-
-        // ==================== СОСТОЯНИЕ ====================
-        let cart = [];
-        let activeCatalog = 'all';
-
-        try {
-            const saved = localStorage.getItem('store_cart');
-            if (saved) cart = JSON.parse(saved);
-        } catch (e) {
-            cart = [];
-        }
-
-        const cartItemIds = new Set(cart.map(item => item.id));
-        products.forEach(p => p.inCart = cartItemIds.has(p.id));
-
-        // ==================== РЕНДЕР ====================
-        function renderCatalogBar() {
-            DOM.catalogBar.innerHTML = catalogs.map(c => `
-                <button class="catalog-chip ${c.id === activeCatalog ? 'active' : ''}" onclick="setCatalog('${c.id}')">${c.name}</button>
-            `).join('');
-        }
-
-        function setCatalog(catalogId) {
-            activeCatalog = catalogId;
-            renderCatalogBar();
-            renderProducts();
-        }
-
-        function renderProducts() {
-            const filtered = activeCatalog === 'all' ? products : products.filter(p => p.catalog === activeCatalog);
-
-            DOM.productsGrid.innerHTML = filtered.map(p => `
-                <div class="product-card">
-                  <div class="product-image-wrap">
-                    ${p.badge ? `<div class="badge ${p.badge.toLowerCase()}">${p.badge}</div>` : ''}
-                    <button class="btn-heart" aria-label="В избранное">❤️</button>
-                    ${p.image}
-                  </div>
-                  <div class="product-category">${getCatalogName(p.catalog)} • ${p.catalog.toUpperCase()}</div>
-                  <div class="product-name">${p.name}</div>
-                  <div class="product-footer">
-                    <span class="product-price">${p.price.toLocaleString()} ₸</span>
-                    <button class="btn-add ${p.inCart ? 'in-cart' : ''}" aria-label="Добавить в корзину" onclick="addToCart(${p.id})">
-                      ${p.inCart ? '✓' : '+'}
-                    </button>
-                  </div>
-                </div>
-            `).join('');
-        }
-const getCatalogName = catalogId => catalogs.find(c => c.id === catalogId)?.name || catalogId;
-
-        // ==================== КОРЗИНА ====================
-        function saveCart() {
-            localStorage.setItem('store_cart', JSON.stringify(cart));
-            const cartIds = new Set(cart.map(item => item.id));
-            products.forEach(p => p.inCart = cartIds.has(p.id));
-        }
-
-        const getCartTotalInfo = () => cart.reduce((acc, item) => {
-            acc.count += item.qty;
-            acc.total += item.price * item.qty;
-            return acc;
-        }, { count: 0, total: 0 });
-
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product || product.inCart) return;
-
-            cart.push({ ...product, qty: 1 });
-            saveCart();
-            updateCartUI();
-            renderProducts();
-            showToast('Добавлено в корзину');
-        }
-
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            saveCart();
-            updateCartUI();
-            renderProducts();
-            showToast('Удалено из корзины');
-        }
-
-        function changeQty(productId, delta) {
-            const item = cart.find(i => i.id === productId);
-            if (!item) return;
-            item.qty += delta;
-            item.qty <= 0 ? removeFromCart(productId) : (saveCart(), updateCartUI());
-        }
-
-        function updateCartUI() {
-            const { count, total } = getCartTotalInfo();
-            DOM.cartCount.textContent = count > 0 ? count : '';
-            DOM.cartTotal.textContent = `${total.toLocaleString()} ₸`;
-            DOM.btnCheckout.disabled = cart.length === 0;
-
-            if (cart.length === 0) {
-                DOM.cartItems.innerHTML = '<div class="cart-empty-state">Ваша корзина пуста<br><span style="font-size:0.8rem; opacity:0.6; margin-top:8px; display:block;">Добавьте что-нибудь из каталога</span></div>';
-                return;
-            }
-
-            DOM.cartItems.innerHTML = cart.map(item => `
-              <div class="cart-item">
-                <div class="cart-item-img">${item.image}</div>
-                <div class="cart-item-info">
-                  <div class="cart-item-cat">${getCatalogName(item.catalog)}</div>
-                  <div class="cart-item-name">${item.name}</div>
-                  <div class="cart-item-price">${item.price.toLocaleString()} ₸</div>
-                </div>
-                <div class="cart-item-controls">
-                  <button class="btn-remove" onclick="removeFromCart(${item.id})">Удалить</button>
-                  <div class="cart-item-qty">
-                    <button class="qty-btn" aria-label="Меньше" onclick="changeQty(${item.id}, -1)">−</button>
-                    <span class="qty-val">${item.qty}</span>
-                    <button class="qty-btn" aria-label="Больше" onclick="changeQty(${item.id}, 1)">+</button>
-                  </div>
-                </div>
-              </div>
-            `).join('');
-        }
-
-        function toggleCart() {
-            const isOpen = DOM.cartPanel.classList.toggle('open');
-            DOM.cartOverlay.classList.toggle('open');
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        }
-
-        // ==================== ОФОРМЛЕНИЕ ЗАКАЗА ====================
-        function openCheckout() {
-            if (cart.length === 0) return;
-            const { total } = getCartTotalInfo();
-            
-            DOM.checkoutInner.innerHTML = `
-            <div class="modal-header">
-              <h3>Оформление заказа</h3>
-              <button class="btn-close" aria-label="Закрыть" onclick="closeCheckout()">✕</button>
-            </div>
-            <div class="modal-body">
-              <h4>Состав заказа</h4>
-              <div class="order-summary">
-                ${cart.map(i => `<div class="order-summary-item"><span>${i.image} ${i.name} <span style="color:var(--text-secondary)">×${i.qty}</span></span><span>${(i.price * i.qty).toLocaleString()} ₸</span></div>`).join('')}
-                <div class="order-summary-divider"></div>
-                <div class="order-summary-total"><span>Итого</span><span>${total.toLocaleString()} ₸</span></div>
-              </div>
-              <h4>Данные получателя</h4>
-              <div class="form-group"><label>Имя</label><input type="text" id="inputName" placeholder="Ваше имя"></div>
-              <div class="form-group"><label>Email</label><input type="email" id="inputEmail" placeholder="email@example.com"></div>
-              <div class="form-group"><label>Телефон</label><input type="tel" id="inputPhone" placeholder="+7 ___ ___-__-__"></div>
-              <button class="btn-primary" style="margin-top: 12px" id="btnSubmitOrder" onclick="submitOrder()">Оплатить ${total.toLocaleString()} ₸</button>
-            </div>`;
-
-            DOM.checkoutModal.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-function closeCheckout() {
-            DOM.checkoutModal.classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        function submitOrder() {
-            const name = document.getElementById('inputName').value.trim();
-            const email = document.getElementById('inputEmail').value.trim();
-            const phone = document.getElementById('inputPhone').value.trim();
-
-            if (!name) return showToast('Пожалуйста, введите имя');
-            if (!email && !phone) return showToast('Введите email или телефон');
-
-            const btn = document.getElementById('btnSubmitOrder');
-            btn.disabled = true; btn.textContent = 'ОБРАБОТКА...';
-
-            setTimeout(() => {
-                const { total } = getCartTotalInfo();
-                DOM.checkoutInner.innerHTML = `
-                  <div class="modal-header">
-                    <h3>Успешно</h3>
-                    <button class="btn-close" onclick="closeCheckout()">✕</button>
-                  </div>
-                  <div class="modal-body success-screen">
-                    <div class="success-icon">✔️</div>
-                    <h3>Спасибо, ${escapeHTML(name)}!</h3>
-                    <p>Ваш заказ успешно оформлен.</p>
-                    <div class="order-number">SEER-${Date.now().toString(36).toUpperCase()}</div>
-                    <p style="font-size:0.85rem;color:var(--text-secondary)">К оплате: ${total.toLocaleString()} ₸<br>${email ? `Email: ${escapeHTML(email)}<br>` : ''}${phone ? `Тел: ${escapeHTML(phone)}` : ''}</p>
-                    <button class="btn-primary" onclick="closeCheckout()" style="margin-top: 24px;">Вернуться в каталог</button>
-                  </div>`;
-                
-                cart = []; saveCart(); updateCartUI(); renderProducts();
-                DOM.cartPanel.classList.remove('open'); DOM.cartOverlay.classList.remove('open');
-            }, 1000);
-        }
-
-        const escapeHTML = str => { const div = document.createElement('div'); div.textContent = str; return div.innerHTML; };
-
-        // ==================== TOAST & EVENTS ====================
-        let toastTimeout;
-        function showToast(msg) {
-            clearTimeout(toastTimeout);
-            DOM.toast.textContent = msg;
-            DOM.toast.classList.add('show');
-            toastTimeout = setTimeout(() => DOM.toast.classList.remove('show'), 2500);
-        }
-
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') DOM.checkoutModal.classList.contains('open') ? closeCheckout() : (DOM.cartPanel.classList.contains('open') && toggleCart());
-        });
-        DOM.checkoutModal.addEventListener('click', function(e) { if (e.target === this) closeCheckout(); });
-
-        // Инициализация
-        renderCatalogBar();
-        renderProducts();
-        updateCartUI();
-    </script>
+    <script src="script.js" type="module"></script>
 </body>
 </html>
